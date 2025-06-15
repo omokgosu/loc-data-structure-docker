@@ -86,9 +86,32 @@ int main()
 
 ////////////////////////////////////////////////////////////////////////
 
+// ll->head 대신에 ptrhead 쓰는 느낌? **ptrHead 에는 첫번째 노드 주소 값이 있고 *ptrHea
 int moveMaxToFront(ListNode **ptrHead)
 {
-    /* add your code here */
+    // ptrHead 값 자체가 NULL 이거나, *ptrHead 가 가리키는 주소가 없거나, ptrHead 가 가리키는 주소의 next 가 null이면
+    if ( ptrHead == NULL || *ptrHead == NULL ||  (*ptrHead)->next == NULL) return 0;
+
+    ListNode** maxPtr = ptrHead; // maxPtr = maxNode를 가리키는 포인터의 주소
+    ListNode** currentPtr = &(*ptrHead)->next; // 현재 노드를 가리키는 포인터의 주소
+
+    while( *currentPtr != NULL ) {
+        if( (*currentPtr)->item > (*maxPtr)->item ) {
+            maxPtr = currentPtr;
+        }
+        currentPtr = &(*currentPtr)->next;
+    } 
+
+    // maxPtr 이 head 면 안바꿔도됨
+    if ( maxPtr == ptrHead ) return 0;
+
+    // maxPtr 을 제거
+    ListNode* maxNode = *maxPtr;
+    *maxPtr = maxNode->next;
+
+    // maxNode 를 맨 앞에 삽입
+    maxNode->next = *ptrHead;
+    *ptrHead = maxNode;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
