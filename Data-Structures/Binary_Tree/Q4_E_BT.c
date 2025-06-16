@@ -101,9 +101,19 @@ int main()
 //////////////////////////////////////////////////////////////////////////////////
 
 int sumOfOddNodes(BTNode *node)
-
 {
-    /* add your code here */
+    // null 이면 0이겠지 뭐..
+    if ( node == NULL ) return 0;
+
+    // 둘다 없으면 리프노드니까 더해주면되겠지 뭐..
+    if ( node->left == NULL && node->right == NULL) {
+        if ( node->item % 2 == 0) return 0;
+        
+        return node->item;
+    }
+
+    // 재귀야 "해줘" 이론상맞잖아
+    return sumOfOddNodes(node->left) + sumOfOddNodes(node->right);
 }
 
 //////////////////////////////////////////////////////////////////////////////////

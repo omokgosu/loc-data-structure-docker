@@ -95,9 +95,15 @@ int main()
 //////////////////////////////////////////////////////////////////////////////////
 
 int maxHeight(BTNode *node)
-
 {
-    /* add your code here */
+    // 걍 노드가 NULL 이면.. 없는 끝 값 이잖아..?
+    if ( node == NULL ) return -1;
+
+    // 왼쪽이랑 아래쪽 자식이 둘다 없으면 0번째..인거잖아?
+    if ( node->left == NULL && node->right == NULL) return 0;
+
+    // 1씩 더하면서 return 해주면..되잖아?
+    return maxHeight(node->left) > maxHeight(node->right) ? maxHeight(node->left) + 1 : maxHeight(node->right) + 1;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

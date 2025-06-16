@@ -113,11 +113,56 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-int identical(BTNode *tree1, BTNode *tree2)
+int identical(BTNode *tree1, BTNode *tree2) {
+   
+    // 1. 두 트리는 모두 비어있으면 동일 구조
+    if ( tree1 == NULL && tree2 == NULL )  return 1;
 
-{
-   /* add your code here */
+    // 2. 둘 중 하나라도 null 이면 동일구조아님
+    if ( (tree1 == NULL) != (tree2 == NULL) ) return 0;
+
+    return (tree1->item == tree2->item) && identical(tree1->left , tree2->left) && identical(tree1->right , tree2->right);
 }
+
+// int identical(BTNode *tree1, BTNode *tree2) {
+   
+//     // 1. 두 트리는 모두 비어있으면 동일 구조
+//     if ( tree1 == NULL && tree2 == NULL )  return 1;
+
+//     // 2. 둘 중 하나라도 null 이면 동일구조아님
+//     if ( (tree1 == NULL) != (tree2 == NULL) ) return 0;
+
+//     // 3. 두 트리가 모두 비어있지 않으면 ( 현재 노드값이 같고 and 왼쪽 오른쪽 서버트리가 동일 )
+//     // 일단 트리 만들어서 세팅해
+//     Stack leftTree , rightTree;
+//     leftTree.top = NULL;
+//     rightTree.top = NULL;
+//     push(&leftTree , tree1);
+//     push(&rightTree , tree2);
+
+//     // 스택 top 에 둘다 값이 있어야해
+//     while( leftTree.top != NULL && rightTree.top != NULL ) {
+//         BTNode *left, *right;
+//         left = pop(&leftTree);
+//         right = pop(&rightTree);
+        
+//         // 값 다르면 ㅈㅈㅈ
+//         if ( left->item != right->item ) return 0; 
+
+//         // 있으면 넣어줘
+//         if ( left->right != NULL ) push(&leftTree , left->right);
+//         if ( left->left != NULL ) push(&leftTree , left->left);
+//         if ( right->right != NULL ) push(&rightTree , right->right);
+//         if ( right->left != NULL ) push(&rightTree , right->left);
+//     }
+
+//     // 중간에 끝나면 안맞는거임
+//     if ( leftTree.top != NULL || rightTree.top != NULL ) {
+//         return 0;
+//     } else {
+//         return 1;
+//     }
+// }
 
 /////////////////////////////////////////////////////////////////////////////////
 

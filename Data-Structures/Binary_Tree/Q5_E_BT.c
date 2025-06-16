@@ -105,7 +105,21 @@ int main()
 
 void mirrorTree(BTNode *node)
 {
-	/* add your code here */
+	// 마지막이든 시작 node 값이든 null 이면 return 이겠지 이건 국룰이잖ㅇ
+    if ( node == NULL ) return;
+
+    // 왼쪽 오른쪽 자식 둘다 없으면 리프노드니까 걍 리턴이겠지?
+    if ( node->left == NULL && node->right == NULL ) return;
+
+    // 후위순회 방식으로 left랑 right 먼저 조지고
+    mirrorTree(node->left);
+    mirrorTree(node->right);
+
+    // 다 가고나서 자식부터 바꿔줘 그냥 포인터값 바꾸면 되는거아님? ㅋㅋ
+    BTNode *temp;
+    temp = node->left;
+    node->left = node->right;
+    node->right = temp;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

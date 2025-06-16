@@ -102,7 +102,42 @@ int main()
 
 int hasGreatGrandchild(BTNode *node)
 {
-	/* add your code here */
+    // 1. 이진 트리에서 최소한 하나 이상의 증손자가 있는 노드의 값을 출력합니다.
+    //            50
+    //           /  \
+    //         30    60
+    //        /  \     \
+    //      25   65     75
+    //    /        \
+    //  20          15
+    
+    // 예시트리에서는 50만 증손자를 가지므로 50만 출력돼요.
+
+    // 2. 증손자가 있는 트리를 찾으려면 우리가 풀었던 max height 를 쓰면 돼요.
+    //            50(3)
+    //           /  \
+    //         30(2) 60(2)
+    //        /  \     \
+    //      25(1) 65(1) 75(1)
+    //    /        \
+    //  20(0)      15(0)
+    // 그보다 하위노드는 return -1;
+
+    // null 값이면 -1 을 return 해줘요. 재귀할때 +1 을 해주니까 0이어야 해요.
+    if ( node == NULL ) return -1;
+
+    // 왼쪽 오른쪽 둘다없으면 마지막 노드예요.
+    if ( node->left == NULL && node->right == NULL ) return 0;
+
+    // 왼쪽 오른쪽 자식의 값에서 1을 더해줘요.
+    int left = hasGreatGrandchild(node->left) + 1;
+    int right = hasGreatGrandchild(node->right) + 1;
+
+    int max = left > right ? left : right; // 왼쪽,오른쪽 트리중 더 큰 값
+
+    if ( max >= 3 ) printf("%d " , node->item); // 증손자
+
+    return max; 
 }
 
 //////////////////////////////////////////////////////////////////////////////////
