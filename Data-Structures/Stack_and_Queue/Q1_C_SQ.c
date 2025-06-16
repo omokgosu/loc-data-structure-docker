@@ -116,12 +116,35 @@ int main()
 
 void createQueueFromLinkedList(LinkedList *ll, Queue *q)
 {
-	/* add your code here */
+    if ( ll == NULL || ll->head == NULL ) return;
+    
+    // 1. 큐를 전부 비우고 실행해야함
+    removeAllItemsFromQueue(q);
+
+    ListNode *current = ll->head;
+    int count = ll->size;
+
+    for ( int i = 0; i < count; i++ ) {
+        enqueue(q , current->item);
+        current = current->next;
+    }
 }
 
 void removeOddValues(Queue *q)
 {
-	/* add your code here */
+	if ( q == NULL || (q->ll).head == NULL || q->ll.size == 0) return;
+
+    ListNode* current = (q->ll).head;
+    int count = (q->ll).size;
+    int value = 0;
+
+    for ( int i = 0; i < count; i++ ) {
+        value = current->item;
+        current = current->next;
+
+        dequeue(q);
+        if (value % 2 != 0) enqueue(q,value);
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////

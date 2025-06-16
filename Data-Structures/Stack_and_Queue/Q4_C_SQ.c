@@ -112,7 +112,26 @@ int main()
 
 void reverse(Queue *q)
 {
-/* add your code here */
+    if (q == NULL || q->ll.head == NULL || q->ll.size <= 1 ) return;
+    
+    // 스택 생성
+    Stack s;
+
+    s.ll.head = NULL;
+    s.ll.size = 0;
+    s.ll.tail = NULL;
+
+    // 큐에 있는거 전부 스택으로
+    while (!isEmptyQueue(q)) {
+        int value = dequeue(q);
+        push(&s, value);
+    }
+
+    // 스택에 있는거 전부 큐로
+    while (!isEmptyStack(&s)) {
+        int value = pop(&s);
+        enqueue(q, value);
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

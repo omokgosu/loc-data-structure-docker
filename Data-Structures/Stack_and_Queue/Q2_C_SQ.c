@@ -113,12 +113,43 @@ int main()
 
 void createStackFromLinkedList(LinkedList *ll, Stack *s)
 {
-    /* add your code here */
+    if ( ll == NULL || ll->size == 0 || s == NULL ) return;
+
+    // 1. 스택 싹 비워줌
+    while (s->ll.size > 0) {
+        pop(s);
+    }
+
+    // 2. 연결노드 첫번째 부터 push
+    ListNode* current = ll->head;
+    while (current != NULL) {
+        int value = current->item;
+        push(s,value);
+        current = current->next;
+    }
 }
 
 void removeEvenValues(Stack *s)
 {
-	/* add your code here */
+	if ( s == NULL || (s->ll).head == NULL || s->ll.size == 0) return;
+
+    // 저장해둘 임시스택 이거없이 짝수제거가 가능하긴 함?
+    Stack tempS;
+
+    tempS.ll.head = NULL;
+    tempS.ll.size = 0;
+
+    // 짝수인 애들만 tempS에 넣어
+    while (!isEmptyStack(s)) {
+        int value = pop(s);
+        if ( value % 2 == 0) push(&tempS,value);
+    }
+
+    // tempS에 있는거 다시 S에 넣어
+    while(!isEmptyStack(&tempS)) {
+        int value = pop(&tempS);
+        push(s,value);
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////
