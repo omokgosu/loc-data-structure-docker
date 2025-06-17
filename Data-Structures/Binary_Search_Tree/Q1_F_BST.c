@@ -93,8 +93,26 @@ int main()
 
 void levelOrderTraversal(BSTNode* root)
 {
+    // 루트없으면 나가!!! 갈!!
+    if ( root == NULL ) return;
 
-    /* add your code here */
+    // 큐 초기화 해줘
+    Queue q;
+    q.head = NULL;
+    q.tail = NULL;
+
+    // 초기값 넣어줘 여기선 BSTndoe 인 root 야 얘는 item 이랑 left 랑 right 있어어
+    enqueue(&(q.head) , &(q.tail) , root);
+
+    // q.head 가 NULL 아니면 계속돌아
+    while ( q.head != NULL ) {
+        BSTNode *current = dequeue(&(q.head) , &(q.tail));
+    
+        printf("%d ", current->item);
+    
+        if ( current->left ) enqueue(&(q.head) , &(q.tail) , current->left);
+        if ( current->right ) enqueue(&(q.head) , &(q.tail) , current->right);
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////

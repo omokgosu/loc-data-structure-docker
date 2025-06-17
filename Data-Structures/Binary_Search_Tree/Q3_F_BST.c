@@ -91,7 +91,27 @@ int main()
 
 void preOrderIterative(BSTNode *root)
 {
-	 /* add your code here */
+    // root 노드 없으면 걍 return 
+	if ( root == NULL ) return;
+
+    // 스택 초기화
+    Stack s;
+    s.top = NULL;
+
+    BSTNode *current = root;
+
+    // current 가 null 이아니고 스택도 안비어있으면 계속 돌아돌아내가돌아돌아
+    while ( current != NULL || !isEmpty(&s)) {
+
+        if ( current != NULL ) {
+            printf("%d " , current->item);
+            push(&s , current->right);
+            push(&s , current->left);
+        }
+
+        current = pop(&s);
+    }
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////

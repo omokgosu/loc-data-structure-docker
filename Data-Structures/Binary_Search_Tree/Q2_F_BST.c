@@ -90,7 +90,32 @@ int main()
 
 void inOrderTraversal(BSTNode *root)
 {
-	 /* add your code here */
+    // root 가 NULL 값이면 필요없잖아
+	if ( root == NULL ) return;
+    
+    // 스택 초기화
+    Stack s;
+    s.top = NULL;
+
+    BSTNode *current = root;
+    
+    // 왼쪽 루트 오른쪽을 어떻게 할까?
+    // 스택이 비고 current 가 NULL 일때까지 반복
+    while( current != NULL || !isEmpty(&s) ) {
+
+        // 현재 노드를 따라 계속 왼쪽으로 push
+        while ( current != NULL ) {
+            push(&s , current);
+            current = current->left;
+        }
+
+        // 왼쪽이 끝나면 pop 해서 출력, 그리고 오른쪽 자식으로 이동.
+        current = pop(&s);    
+        printf("%d " , current->item);
+
+        // 그리고 오른쪽으로 이동
+        current = current->right;
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
