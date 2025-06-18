@@ -95,7 +95,7 @@ void inOrderTraversal(BSTNode *root)
     
     // 스택 초기화
     Stack s;
-    s.top = NULL;
+    // s.top = NULL;
 
     BSTNode *current = root;
     

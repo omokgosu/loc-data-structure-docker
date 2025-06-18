@@ -100,12 +100,11 @@ void postOrderIterativeS2(BSTNode *root)
     s2.top = NULL;
 
     BSTNode *currnet = root;
-    BSTNode *prev = NULL;
 
     push( &s1 , currnet );
 
-    // stack 1 에는 root -> right -> left 순서로 노드를 탐색하면서 
-    // 이걸 stack 2 에 저장함 그럼 stack 2에는 left->right->root 로 쌓임
+    // stack 1 에는 root -> left -> right 순서로 노드를 탐색하면서 제일 위에거 pop 해줘
+    // 이걸 stack 2 에 저장함 그럼 stack 2에는 left 가 제일 높게됨
     while( !isEmpty(&s1) ) {
         BSTNode *node = pop(&s1);
         push(&s2 , node);

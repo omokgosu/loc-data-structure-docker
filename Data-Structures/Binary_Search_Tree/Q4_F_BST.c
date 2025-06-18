@@ -99,44 +99,39 @@ void postOrderIterativeS1(BSTNode *root)
     s.top = NULL;
 
     BSTNode *current = root; // 현재노드
-    BSTNode *prev = NULL; // 바로 직전 노드 정보보
+    BSTNode *prev = NULL; // 바로 직전 노드 정보
 
-    push( &s , current );
+     while ( current != NULL || !isEmpty(&s)) {
+        
+        // 현재 탐색 중인 노드 정보
+        if ( current != NULL ) {
+            push( &s , current ); // 스택에 현재 정보를 넣어줌
 
-     while (!isEmpty(&s)) {
-        current = peek(&s);
+            prev = current ; // 이전 노드라고 알려줘
+            current = current->left; // 왼쪽으로 이동
+        } 
+        // 즉 currnet 가 null 일 때, 왼쪽, 혹은 오른쪽 노드로 갔는데 null 이여
+        else {
+            current = peek(&s); // 바로 직전 노드 정보를 가져와 부모노드겠지?
 
-        // 왼쪽 또는 오른쪽 자식으로 내려가는 경우
-        if (prev == NULL || prev->left == current || prev->right == current) {
-            if (current->left != NULL) {
-                push(&s, current->left);
-            } else if (current->right != NULL) {
-                push(&s, current->right);
+            // 이전 노드가 left 랑 같으면 왼쪽에서 돌아온 거임 ( 노드를 처음 처리하는거랑 경우가 다름 )
+            if ( prev == current->left ) {
+                prev = current;
+                current = current->right;
             }
-            else {
-                // 리프 노드
-                printf("%d ", current->item);
-                pop(&s);
-            }
-        }
-
-        // 왼쪽 자식에서 돌아온 경우
-        else if (current->left == prev) {
-            if (current->right != NULL) {
-                push(&s, current->right);
+            // 오른쪽이 존재하지만 아직 방문 안함
+            else if ( current->right != NULL && prev != current->right ) {
+                prev = current;
+                current = current->right;
             } else {
-                printf("%d ", current->item);
-                pop(&s);
+                current = pop(&s);
+                printf("%d " , current->item);
+                prev = current;
+                current = NULL;
             }
         }
+        // 되돌아 왔을 때의 정보
 
-        // 오른쪽 자식에서 돌아온 경우
-        else if (current->right == prev) {
-            printf("%d ", current->item);
-            pop(&s);
-        }
-
-        prev = current;
     }
 }
 

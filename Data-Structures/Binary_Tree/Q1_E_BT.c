@@ -121,7 +121,11 @@ int identical(BTNode *tree1, BTNode *tree2) {
     // 2. 둘 중 하나라도 null 이면 동일구조아님
     if ( (tree1 == NULL) != (tree2 == NULL) ) return 0;
 
-    return (tree1->item == tree2->item) && identical(tree1->left , tree2->left) && identical(tree1->right , tree2->right);
+    return (
+        (tree1->item == tree2->item) &&  // itme 이 같고
+        identical(tree1->left , tree2->left) &&  // 왼쪽 자식이 서로 같고
+        identical(tree1->right , tree2->right) // 오른쪽 자식이 서로 같아야함
+    );
 }
 
 // int identical(BTNode *tree1, BTNode *tree2) {
